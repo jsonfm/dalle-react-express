@@ -5,6 +5,9 @@ import { preview } from "../assets";
 import { getRandomPrompt } from '../utils';
 
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://dalle-express-backend.onrender.com";
+
+
 function CreatePost() {
     const navigate = useNavigate();
     const [form, setform] = useState({
@@ -20,7 +23,7 @@ function CreatePost() {
         if(form.prompt){
             try{
                 setGeneratingImg(true);
-                const response = await fetch(`http://localhost:8080/api/v1/dalle`, {
+                const response = await fetch(`${BACKEND_URL}/api/v1/dalle`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -47,7 +50,7 @@ function CreatePost() {
         if(form.prompt && form.photo){
             setLoading(true);
             try {
-                const response = await fetch(`http://localhost:8080/api/v1/post`, {
+                const response = await fetch(`${BACKEND_URL}/api/v1/post`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
